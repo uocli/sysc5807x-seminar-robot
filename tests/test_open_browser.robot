@@ -24,7 +24,7 @@ Sleep3Seconds
     Sleep    3s
 
 Ouvrir le navigateur
-    Open Browser    ${INITIAL_URL}    ${BROWSER}
+    Open Browser    ${INITIAL_URL}    ${BROWSER}    --headless
 
 关闭浏览器
     Close All Browsers
