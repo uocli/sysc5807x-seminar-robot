@@ -8,6 +8,7 @@ Concatenate Strings Test
     Should Be Equal    ${result}    Hello World This is a test
 
 Split String Test
+    [Tags]    Java
     ${result}=    Split String    Hello-World-This-is-a-test    -
     Should Be Equal    ${result[0]}    Hello
     Should Be Equal    ${result[1]}    World
@@ -17,6 +18,7 @@ Split String Test
     Should Be Equal    ${result[5]}    test
 
 Get File Extension Test
+    [Tags]    Java
     ${extension}=    Get File Extension    example.txt
     Should Be Equal    ${extension}    .txt
 
