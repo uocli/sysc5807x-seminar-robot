@@ -49,6 +49,7 @@ jobs:
 
   notification:
     runs-on: ubuntu-latest
+    needs: robot-framework  # Ensures this job waits for robot-framework to complete
     if: failure()  # Triggers only if the previous job failed
     steps:
       - name: Send Email via Resend SMTP
