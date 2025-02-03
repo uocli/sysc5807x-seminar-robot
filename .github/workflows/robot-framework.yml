@@ -55,10 +55,10 @@ jobs:
       - name: Send Email via Resend SMTP
         uses: dawidd6/action-send-mail@v3
         with:
-          server_address: smtp.resend.com
+          server_address: ${{ secrets.SMTP_SERVER }}
           server_port: 587  # Resend supports ports 25, 2525, 587
-          username: ${{ secrets.RESEND_SMTP_USER }}
-          password: ${{ secrets.RESEND_SMTP_PASS }}
+          username: ${{ secrets.SMTP_USER }}
+          password: ${{ secrets.SMTP_PASS }}
           subject: "🚨 GitHub Actions Workflow Failed!"
           body: "The workflow has failed. Check logs: https://github.com/${{ github.repository }}/actions/runs/${{ github.event.workflow_run.id }}"
           to: ${{ secrets.EMAIL_RECIPIENTS }}
