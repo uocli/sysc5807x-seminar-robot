@@ -1,4 +1,4 @@
-name: Robot Framework CI
+name: Robot Framework CI with Jython
 
 on:
   push:
@@ -16,29 +16,42 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3  # Use the latest version
 
-      - name: Set up Python
-        uses: actions/setup-python@v4  # Use the latest version
-        with:
-          python-version: '3.8'  # Specify the Python version you want to use
-
-      - name: Install dependencies
+      - name: Install Java
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          sudo apt update
+          sudo apt install -y openjdk-11-jdk  # Install Java 11 (or whichever version you need)
+
+      - name: Install Jython
+        run: |
+          wget https://github.com/jythontools/jython/releases/download/2.7.2/jython-standalone-2.7.2.jar  # Download Jython standalone jar
+          sudo mv jython-standalone-2.7.2.jar /usr/local/bin/jython.jar  # Move it to a location in your PATH
+
+      - name: Install dependencies from requirements.txt
+        run: |
+          java -jar /usr/local/bin/jython.jar -m ensurepip  # Ensure pip is installed with Jython
+          java -jar /usr/local/bin/jython.jar -m pip install -r requirements.txt  # Install dependencies from your requirements.txt
 
       - name: Install Google Chrome
         run: |
           sudo apt update
           sudo apt install -y google-chrome-stable
 
+      - name: Install ChromeDriver
+        run: |
+          CHROMEDRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE)  # Get the latest ChromeDriver version
+          wget https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip  # Download ChromeDriver
+          unzip chromedriver_linux64.zip  # Unzip it
+          sudo mv chromedriver /usr/local/bin/  # Move ChromeDriver to a directory in PATH
+          rm chromedriver_linux64.zip  # Clean up the zip file
+
       - name: Create results directory
         run: |
           mkdir -p results/${{ github.run_id }}  # Create a unique directory for this run
 
-      - name: Run Robot Framework tests
+      - name: Run Robot Framework tests with Jython
         continue-on-error: true  # Ensures the job doesn't fail if tests fail
         run: |
-          robot --outputdir results/${{ github.run_id }} tests/  # Store results in the unique directory
+          java -jar /usr/local/bin/jython.jar -m robot tests/ --outputdir results/${{ github.run_id }}  # Run the tests using Jython
 
       - name: Upload Test Results
         uses: actions/upload-artifact@v4  # Use the latest version
