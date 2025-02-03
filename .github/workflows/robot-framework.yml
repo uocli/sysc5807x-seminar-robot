@@ -62,4 +62,4 @@ jobs:
           subject: "🚨 GitHub Actions Workflow Failed!"
           body: "The workflow has failed. Check logs: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
           to: ${{ secrets.EMAIL_RECIPIENTS }}
-          from: "GitHub Actions <cicd@uocli.me>"
+          from: ${{ secrets.SMTP_SEND_AS }}
