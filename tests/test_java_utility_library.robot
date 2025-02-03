@@ -1,5 +1,5 @@
 *** Settings ***
-Library    ../libs/java/UtilityLibrary.java
+Library    ../libs/java/UtilityLibrary.class
 
 *** Test Cases ***
 Concatenate Strings Test
