@@ -38,7 +38,7 @@ jobs:
       - name: Run Robot Framework tests
         continue-on-error: true  # Ensures the job doesn't fail if tests fail
         run: |
-          robot --outputdir results/${{ github.run_id }} --exclude Java tests/  # Store results in the unique directory
+          robot --outputdir results/${{ github.run_id }} --exclude Java1 tests/  # Store results in the unique directory
 
       - name: Upload Test Results
         uses: actions/upload-artifact@v4  # Use the latest version
@@ -47,7 +47,7 @@ jobs:
           name: robot-results-${{ github.run_id }}  # Name the artifact with the run ID
           path: results/${{ github.run_id }}/  # Path to the unique results directory
 
-  notify:
+  notification:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'failure' }}  # Trigger only on failure
     steps:
