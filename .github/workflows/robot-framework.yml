@@ -36,7 +36,7 @@ jobs:
           mkdir -p results/${{ github.run_id }}  # Create a unique directory for this run
 
       - name: Run Robot Framework tests
-        continue-on-error: true  # Ensures the job doesn't fail if tests fail
+        # continue-on-error: true  # Ensures the job doesn't fail if tests fail
         run: |
           robot --outputdir results/${{ github.run_id }} --exclude Java1 tests/  # Store results in the unique directory
 
