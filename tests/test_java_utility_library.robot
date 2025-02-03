@@ -3,6 +3,7 @@ Library    ../libs/java/UtilityLibrary.java
 
 *** Test Cases ***
 Concatenate Strings Test
+    [Tags]    Java
     ${result}=    Concatenate Strings    Hello    World    This    is    a    test
     Should Be Equal    ${result}    Hello World This is a test
 
