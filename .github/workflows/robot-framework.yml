@@ -23,7 +23,7 @@ jobs:
 
       - name: Install Jython
         run: |
-          wget https://github.com/jythontools/jython/releases/download/2.7.2/jython-standalone-2.7.2.jar  # Download Jython standalone jar
+          wget https://repo1.maven.org/maven2/org/python/jython-standalone/2.7.2/jython-standalone-2.7.2.jar  # Correct Jython standalone JAR URL
           sudo mv jython-standalone-2.7.2.jar /usr/local/bin/jython.jar  # Move it to a location in your PATH
 
       - name: Install dependencies from requirements.txt
