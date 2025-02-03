@@ -27,7 +27,8 @@ Sleep3Seconds
     Sleep    3s
 
 Ouvrir le navigateur
-    Open Browser    ${INITIAL_URL}    ${BROWSER}    --headless    --disable-gpu    --no-sandbox    --user-data-dir=${USER_DATA_DIR}
+    ${chrome_options}=    Create Dictionary    --headless    --disable-gpu    --no-sandbox    --user-data-dir=${USER_DATA_DIR}
+    Open Browser    ${INITIAL_URL}    ${BROWSER}    options=${chrome_options}
 
 关闭浏览器
     Close All Browsers
