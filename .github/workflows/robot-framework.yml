@@ -26,10 +26,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Install Google Chrome
-        run: |
-          sudo apt update
-          sudo apt install -y google-chrome-stable
+#      - name: Install Google Chrome
+#        run: |
+#          sudo apt update
+#          sudo apt install -y google-chrome-stable
 
       - name: Create results directory
         run: |
@@ -38,7 +38,7 @@ jobs:
       - name: Run Robot Framework tests
         # continue-on-error: true  # Ensures the job doesn't fail if tests fail
         run: |
-          robot --outputdir results/${{ github.run_id }} --exclude Java tests/  # Store results in the unique directory
+          robot --outputdir results/${{ github.run_id }} --varibable DEFAULT_HEADLESS:True --exclude Java tests/  # Store results in the unique directory
 
       - name: Upload Test Results
         uses: actions/upload-artifact@v4  # Use the latest version
