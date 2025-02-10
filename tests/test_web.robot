@@ -1,7 +1,6 @@
 *** Settings ***
 Documentation       This is a test suite for the web application
-Library     SeleniumLibrary
-
+Resource        ../resources/common.robot
 *** Variables ***
 
 *** Test Cases ***
