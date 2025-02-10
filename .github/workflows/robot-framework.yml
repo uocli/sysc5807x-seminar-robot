@@ -35,10 +35,14 @@ jobs:
         run: |
           mkdir -p results/${{ github.run_id }}  # Create a unique directory for this run
 
-      - name: Run Robot Framework tests
+      - name: Run Robot Framework tests in Chrome
         # continue-on-error: true  # Ensures the job doesn't fail if tests fail
         run: |
-          robot --outputdir results/${{ github.run_id }} --variable DEFAULT_HEADLESS:True --exclude Java tests/  # Store results in the unique directory
+          robot --outputdir results/${{ github.run_id }}/chrome --variable DEFAULT_HEADLESS:True --exclude Java tests/  # Store results in the unique directory
+
+      - name: Run Robot Framework tests in Firefox
+        run: |
+          robot -d results/${{ github.run_id }}/firefox -v DEFAULT_HEADLESS:True -v DEFAULT_BROWSER:firefox -e java tests/
 
       - name: Upload Test Results
         uses: actions/upload-artifact@v4  # Use the latest version
