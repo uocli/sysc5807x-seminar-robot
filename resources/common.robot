@@ -7,7 +7,7 @@ ${DEFAULT_URL}    about:blank
 ${DEFAULT_OPTIONS}    HEADLESS_CHROME_OPTIONS
 
 *** Keywords ***
-Open broswer
+Open browser
     [Arguments]    ${url}=${DEFAULT_URL}    ${browser}=${DEFAULT_BROWSER}
     ${options}=    HEADLESS_CHROME_OPTIONS
     Open Browser    ${url}    ${browser}    options=${options}
