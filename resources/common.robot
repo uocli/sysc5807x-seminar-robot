@@ -15,12 +15,12 @@ ${FIREFOX_EXECUTABLE}    ${CURDIR}${/}drivers${/}geckodriver    # For macOS
 *** Keywords ***
 Open Browser
     [Arguments]    ${url}=${DEFAULT_URL}    ${browser}=${DEFAULT_BROWSER}    ${headless}=${DEFAULT_HEADLESS}
-    Run Keyword If    '${browser}' == 'chrome'    Open Chrome Browser    ${url}    ${headless}
-    Run Keyword If    '${browser}' == 'firefox'    Open Firefox Browser    ${url}    ${headless}
+    Run Keyword If    '${browser}'.lower() == 'chrome'    Open Chrome Browser    ${url}    ${headless}
+    Run Keyword If    '${browser}'.lower() == 'firefox'    Open Firefox Browser    ${url}    ${headless}
 
 Open Chrome Browser
     [Arguments]    ${url}    ${headless}
-    Run Keyword If    '${headless}'.lower()=='true'    Open Chrome Browser With Headless    ${url}
+    Run Keyword If    '${headless}'.lower() == 'true'    Open Chrome Browser With Headless    ${url}
     ...    ELSE    Open Chrome Browser Without Headless    ${url}
 
 Open Chrome Browser With Headless
