@@ -2,7 +2,7 @@
 Library    SeleniumLibrary
 
 *** Variables ***
-${DEFAULT_BROWSER}    firefox
+${DEFAULT_BROWSER}    chrome
 ${DEFAULT_URL}    about:blank
 ${DEFAULT_HEADLESS}   True
 
