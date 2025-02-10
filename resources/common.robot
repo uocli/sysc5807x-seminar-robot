@@ -4,7 +4,7 @@ Library    SeleniumLibrary
 *** Variables ***
 ${DEFAULT_BROWSER}    chrome
 ${DEFAULT_URL}    about:blank
-${DEFAULT_HEADLESS}   True
+${DEFAULT_HEADLESS}   False
 
 ${CHROME_EXECUTABLE}    ${CURDIR}${/}drivers${/}chromedriver    # For macOS
 # ${CHROME_EXECUTABLE}    ${CURDIR}${/}drivers${/}chromedriver.exe    # For Windows
