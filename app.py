@@ -1,5 +1,5 @@
-from flask import Flask, jsonify, request
-from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, jsonify, request  # type: ignore
+from flask_sqlalchemy import SQLAlchemy  # type: ignore
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///login.db'
@@ -13,13 +13,18 @@ class User(db.Model):
 
 @app.route('/login', methods=['POST'])
 def login():
-    username = request.form['username']
-    password = request.form['password']
+    data = request.get_json()  
+    if not data or 'username' not in data or 'password' not in data:
+        return jsonify({"message": "Missing credentials", "status": "fail"}), 400
+
+    username = data['username']
+    password = data['password']
     user = User.query.filter_by(username=username, password=password).first()
+
     if user:
-        return jsonify({"message": "Login successful", "status": "success"})
+        return jsonify({"message": "Login successful", "status": "success"}), 200
     else:
-        return jsonify({"message": "Invalid credentials", "status": "fail"})
+        return jsonify({"message": "Invalid credentials", "status": "fail"}), 401
 
 def add_user(username, password):
     user_exists = User.query.filter_by(username=username).first()
@@ -35,4 +40,4 @@ if __name__ == '__main__':
     with app.app_context():
         db.create_all()
         add_user('test', '123456') 
-    app.run(debug=True)
+    app.run(host='127.0.0.1', port=5001) 

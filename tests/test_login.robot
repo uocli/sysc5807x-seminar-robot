@@ -5,7 +5,7 @@ Suite Setup       Open Browser To Login Page
 Suite Teardown    Close All Browsers
 
 *** Variables ***
-${SERVER}         http://127.0.0.1:5000
+${SERVER}         http://127.0.0.1:5001
 ${BROWSER}        Chrome
 
 *** Test Cases ***
