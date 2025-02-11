@@ -38,7 +38,7 @@ jobs:
       - name: Run Robot Framework tests in Chrome
         # continue-on-error: true  # Ensures the job doesn't fail if tests fail
         run: |
-          robot --outputdir results/${{ github.run_id }}/chrome --variable DEFAULT_HEADLESS:True --exclude Java tests/  # Store results in the unique directory
+          robot --outputdir results/${{ github.run_id }}/chrome --variable DEFAULT_HEADLESS:False --exclude Java tests/  # Store results in the unique directory
 
       - name: Run Robot Framework tests in Firefox
         run: |
