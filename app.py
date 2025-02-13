@@ -13,18 +13,24 @@ class User(db.Model):
 
 @app.route('/login', methods=['POST'])
 def login():
-    data = request.get_json()  
-    if not data or 'username' not in data or 'password' not in data:
-        return jsonify({"message": "Missing credentials", "status": "fail"}), 400
+    try:
+        data = request.get_json(silent=True)
+        if not data:
+            data = request.form.to_dict()
 
-    username = data['username']
-    password = data['password']
-    user = User.query.filter_by(username=username, password=password).first()
+        if not data or 'username' not in data or 'password' not in data:
+            return jsonify({"message": "Missing credentials", "status": "fail"}), 400
 
-    if user:
-        return jsonify({"message": "Login successful", "status": "success"}), 200
-    else:
-        return jsonify({"message": "Invalid credentials", "status": "fail"}), 401
+        username = data['username']
+        password = data['password']
+        user = User.query.filter_by(username=username, password=password).first()
+
+        if user:
+            return jsonify({"message": "Login successful", "status": "success"}), 200
+        else:
+            return jsonify({"message": "Invalid credentials", "status": "fail"}), 401
+    except Exception as e:
+        return jsonify({"message": f"Error: {str(e)}", "status": "fail"}), 500
 
 def add_user(username, password):
     user_exists = User.query.filter_by(username=username).first()
