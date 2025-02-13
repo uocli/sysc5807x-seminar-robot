@@ -3,7 +3,7 @@ import os
 class UtilityLibrary:
     def concatenate_strings(self, *args):
         """Concatenates multiple strings into one."""
-        return ' '.join(args)
+        return ','.join(args)
 
     def split_string(self, string, delimiter=' '):
         """Splits a string by the given delimiter."""
